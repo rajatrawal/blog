@@ -1,0 +1,117 @@
+{% extends 'myApp/base.html' %}
+{% block title %}
+Join Us
+{% endblock title %}
+{% load static %}
+
+{% block body %}
+<form class="row g-3" action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+  <label for="validationServer00" class="form-label">Select Your Profile</label>
+  <select class="form-select" aria-label="Default select example" id='validationServer00' name="type">
+    <option value="doctor" >Doctor</option>
+    <option value="patient" selected>Patient</option>
+  </select>
+  <span class="text-muted">If You Are Doctor You Have To Face Google Authorization For Calender Event.
+  </span>
+  <div class="col-12">
+    <label for="validationServer01" class="form-label">First name</label>
+    <input type="text" class="form-control " aria-describedby="validationServer11Feedback" id="validationServer01"
+      name='firstName' required>
+    <div id="validationServer11Feedback" class="invalid-feedback">
+      Please provide a valid name.
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="validationServer02" class="form-label">Last name</label>
+    <input type="text" class="form-control " aria-describedby="validationServer12Feedback" id="validationServer02"
+      name='lastName' required>
+    <div id="validationServer12Feedback" class="invalid-feedback">
+      Please provide a valid name.
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="validationServerUsername" class="form-label">email</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="inputGroupPrepend3">@</span>
+      <input type="email" class="form-control " id="validationServerUsername" name='email'
+        aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Please choose a e-mail.
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="validationServer06" class="form-label">Username</label>
+    <input type="text" class="form-control " id="validationServer06" name='username'
+      aria-describedby="validationServer06Feedback" required>
+    <div id="validationServer06Feedback" class="invalid-feedback">
+      Please provide a valid username.
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="validationServer03" class="form-label">Password</label>
+    <input type="password" class="form-control " id="validationServer03" name='password'
+      aria-describedby="validationServer03Feedback" required>
+    <div id="validationServer03Feedback" class="invalid-feedback">
+      Password must be min 4 char.
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="validationServer04" class="form-label">Comform Password</label>
+    <input type="password" class="form-control " id="validationServer04" name='comformPassword'
+      aria-describedby="validationServer04Feedback" required>
+    <div id="validationServer04Feedback" class="invalid-feedback">
+      Password must be match.
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label for="validationServer05" class="form-label">Address</label>
+    <input type="text" class="form-control " id="validationServer05" name='address'
+      aria-describedby="validationServer05Feedback" required>
+    <div id="validationServer05Feedback" class="invalid-feedback">
+      Please provide a valid address.
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer08" class="form-label">City</label>
+    <input type="text" class="form-control " id="validationServer08" name='city'
+      aria-describedby="validationServer08Feedback" required>
+    <div id="validationServer08Feedback" class="invalid-feedback">
+      Please provide a valid city.
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer09" class="form-label">State</label>
+    <input type="text" class="form-control " id="validationServer09" name='state'
+      aria-describedby="validationServer09Feedback" required>
+    <div id="validationServer09Feedback" class="invalid-feedback">
+      Please provide a valid state.
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer10" class="form-label">Pincode</label>
+    <input type="text" class="form-control " id="validationServer10" name='pincode'
+      aria-describedby="validationServer10Feedback" required>
+    <div id="validationServer10Feedback" class="invalid-feedback">
+      Please provide a valid pincode.
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupFile07">Upload Profile Image</label>
+    <input type="file" class="form-control" id="inputGroupFile07" name="image" aria-describedby="validationServer07Feedback" required
+      accept='image/*'>
+    <div id="validationServer07Feedback" class="invalid-feedback">
+      Please provide a valid image.
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit" id="submitBtn">Submit form</button>
+  </div>
+</form>
+{% endblock body %}
+
+{% block script %}
+<script src="{% static 'myApp/script.js' %}"></script>
+{% endblock script %}

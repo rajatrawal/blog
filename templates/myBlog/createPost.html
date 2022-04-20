@@ -1,0 +1,102 @@
+{% extends 'myApp/base.html' %}
+{% block title %}
+New Post
+{% endblock title %}
+{% block body %}
+
+
+<form class="row g-3" action="{% url 'create_post' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <label for="validationServer00" class="form-label">Select Your Profile</label>
+    <select class="form-select" aria-label="Default select example" id='validationServer00' name="category">
+    {% for i in post_cat %}
+        <option value="{{i}}" >{{i|title}}</option>
+    {% endfor %}
+    </select>
+    <div class="col-12">
+      <label for="validationServer01" class="form-label">Title</label>
+      <input type="text" class="form-control " aria-describedby="validationServer11Feedback" id="validationServer01"
+        name='title' required>
+      <div id="validationServer11Feedback" class="invalid-feedback">
+        Please provide a valid title.
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="validationServer02" class="form-label">Content</label>
+      <textarea type="textarea"  class="form-control " aria-describedby="validationServer12Feedback" id="validationServer02"
+      name='content' required  cols="30" rows="10"></textarea>
+      <div id="validationServer12Feedback" class="invalid-feedback">
+        Please provide a valid content.
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="validationServer06" class="form-label">Summary</label>
+      <input type="textarea" class="form-control " id="validationServer06" name='summary'
+        aria-describedby="validationServer06Feedback" required>
+      <div id="validationServer06Feedback" class="invalid-feedback">
+        Please provide a valid summary.
+      </div>
+    </div>
+    
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupFile07">Upload Post Image</label>
+        <input type="file" class="form-control" id="inputGroupFile07" name="image" aria-describedby="validationServer07Feedback" required
+        accept='image/*'>
+        <div id="validationServer07Feedback" class="invalid-feedback">
+            Please provide a valid image.
+        </div>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox"  id="flexCheckChecked" name='draft'>
+        <label class="form-check-label" for="flexCheckChecked">
+          Save as draft
+        </label>
+      </div>
+ 
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" id="submitBtn">Create Post</button>
+    </div>
+  </form>
+
+
+{% endblock body %}
+
+{% block script %}
+<script>
+    forCheckInput(false);
+function forCheckInput(arg) {
+  val = true;
+  let tagArray =  Array.from(document.getElementsByTagName('input')).concat(Array.from(document.getElementsByTagName('textarea')));
+
+ tagArray.forEach(e => {
+    if (arg === false) {
+      e.addEventListener('input', e => {
+        checkInput(e.target);
+      })
+    }
+    else {
+      checkInput(e);
+
+    }
+  });
+
+}
+let checkInput = (e) => {
+
+  if (e.value.length != 0) {
+    e.classList.add('is-valid');
+    e.classList.remove('is-invalid');
+  }
+  else {
+    e.classList.add('is-invalid');
+    e.classList.remove('is-valid');
+    val = false;
+  }
+};
+submitBtn.addEventListener('click', (e) => {
+  forCheckInput(true);
+  if (!val) {
+    e.preventDefault();
+  }
+})
+</script>
+{% endblock script %}

@@ -1,0 +1,32 @@
+{% extends 'myApp/base.html' %}
+
+{% block title %}Home{% endblock title %}
+{% block body %}
+<h1>Latest Post</h1>
+<div class="">  
+    {% for post in posts %}
+    <div class="card mb-3 mt-4" style="">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="media/{{post.image}}" class="img-fluid rounded-start" alt="..." style='max-height: 300px;'>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text"><small class="text-muted">By {{post.user.user.username}} At {{post.time}}</small></p>
+
+              <p class="card-text">{{post.summary}}</p>
+              {% if post.content|length > 299 %}
+              <p class="card-text">{{post.content|slice:"1:300"}}...</p>
+              {% else %}
+              <p class="card-text">{{post.content}}</p>
+
+              {% endif %}
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% endblock body %}

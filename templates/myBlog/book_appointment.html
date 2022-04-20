@@ -1,0 +1,82 @@
+{% extends 'myApp//base.html' %}
+{% block title %}Book Appointment{% endblock title %}
+{% block body %}
+
+<form class="row g-3" action="{% url 'book_apmt' %}" method="POST" >{% csrf_token %}
+  <label for="validationServer00" class="form-label">Select Your Doctor</label>
+  <select class="form-select" aria-label="Default select example" id='validationServer00' name="username">
+  {% for i in doctors %}
+      <option value="{{i.user.username}}" {% if i.user.username == doctor %}selected{% endif %}>{{i.user.first_name|title}} {{i.user.last_name|title}}</option>
+  {% endfor %}
+  </select>
+  <label for="validationServer01" class="form-label">Select Type</label>
+  <select class="form-select" aria-label="Default select example" id='validationServer01' name="cat">
+      <option value="mental health" >mental health</option>
+      <option value="heart disease" >heart disease</option>
+      <option value="covid19" >covid19</option>
+      <option value="immunization" >immunization</option>
+  </select>
+  <div class="col-md-6">
+      <label for="validationServer01" class="form-label">Date</label>
+      <input type="date" class="form-control " aria-describedby="validationServer01Feedback" id="validationServer01"
+        name='date' required>
+      <div id="validationServer01Feedback" class="invalid-feedback">
+        Please provide a valid Date.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationServer02" class="form-label">Time</label>
+      <input type="time" class="form-control " aria-describedby="validationServer02Feedback" id="validationServer02"
+        name='time' required>
+      <div id="validationServer02Feedback" class="invalid-feedback">
+        Please provide a valid Time.
+      </div>
+    </div>
+ 
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" id="submitBtn">Book</button>
+    </div>
+  </form>
+
+{% endblock body %}
+
+{% block script %}
+<script>
+    forCheckInput(false);
+function forCheckInput(arg) {
+  val = true;
+  let tagArray =  Array.from(document.getElementsByTagName('input'))
+
+ tagArray.forEach(e => {
+    if (arg === false) {
+      e.addEventListener('input', e => {
+        checkInput(e.target);
+      })
+    }
+    else {
+      checkInput(e);
+
+    }
+  });
+
+}
+let checkInput = (e) => {
+
+  if (e.value.length != 0) {
+    e.classList.add('is-valid');
+    e.classList.remove('is-invalid');
+  }
+  else {
+    e.classList.add('is-invalid');
+    e.classList.remove('is-valid');
+    val = false;
+  }
+};
+submitBtn.addEventListener('click', (e) => {
+  forCheckInput(true);
+  if (!val) {
+    e.preventDefault();
+  }
+})
+</script>
+{% endblock script %}

@@ -1,0 +1,32 @@
+{% extends 'myApp/base.html' %}
+{% block title %}My Appointments{% endblock title %}
+{% block body %}
+{% if is_apmts %}
+
+{% for i  in apmts %}
+<div class="card mb-3" style="max-width: 100%; height: 100%;">
+    <div class="row g-0">
+      <div class="col-md-4 d-flex align-items-center">
+        <img src="media/{{i.doctor.image}} " class="img-fluid rounded-start p-2" style='height:12rem;' alt="...">
+      </div>
+      <div class="col-md-8 p-2">
+        <div class="card-body ">
+          <h5 class="card-title">{{i.doctor.user.first_name|title}} {{i.doctor.user.last_name|title}}</h5>
+          <p class="card-text">
+              Your Appointments Has Been Fixed With Dr. {{i.doctor.user.first_name|title}} {{i.doctor.user.last_name|title}} For {{i.apmt.cat}}
+
+          </p>
+          <p><span class='fw-bold'>Date :</span> {{i.apmt.time.date}}</p>
+          <p><span class='fw-bold'>Time :</span>{{i.apmt.time.time}}</p>
+          <p><span class='fw-bold'>End Time :</span>{{i.apmt.end_time.time}}</p>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<h2>
+    You Don't Hava Any Appointment
+</h2> 
+{% endif %}
+{% endblock body %}

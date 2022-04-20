@@ -1,0 +1,43 @@
+{% extends 'myApp/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+{% if is_all_post %}
+
+<h1>Latest Post</h1>
+{% else %}
+<h1>My Post</h1>
+{% endif %}
+<div class="">  
+    {% for cat,posts_list in posts.items %}
+  <h3 class='mt-4 mb-4'>{{cat|title}}</h3>
+  {% for post in posts_list %}
+    <div class="card mb-3 mt-4" style="">
+        <div class="row g-0">
+          <div class="col-md-4 d-flex justify-content-center align-item-center">
+            <img src="/media/{{post.image}}" class="img-fluid rounded-start" alt="..." style='max-height: 300px;'>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text"><small class="text-muted">By {{post.user.user.username}} At {{post.time}}</small></p>
+
+              <p class="card-text">{{post.summary}}</p>
+              {% if post.content|length > 40 %}
+              <p class="card-text">{{post.content|truncatewords:15}}...</p>
+              {% else %}
+              <p class="card-text">{{post.content}}</p>
+
+              {% endif %}
+              <a href="/blogNo/{{post.id}}" class='btn btn-link'>View Blog</a>
+
+            {% if post.is_draft == 'true' %}
+            <p class='text-danger'>This Post Is Marked As Draft <a href="/unDraft/{{post.id}}" class='text-danger'>Click Here To Undraft Post</a></p>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% endfor %}
+</div>
+{% endblock body %}

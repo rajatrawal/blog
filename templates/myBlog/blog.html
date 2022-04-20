@@ -1,0 +1,24 @@
+{% extends 'myApp/base.html' %}
+{% block title  %}
+{{post.title}}
+{% endblock title  %}
+
+{% block body %}
+<div class="">
+    <div class="text-center">
+        <img src="/media/{{post.image}}" class="img-fluid rounded-start "    style='height:500px; '  alt="...">
+    </div>
+    
+    <h2 class="mt-4 ">{{post.title}}</h2>
+    <p class="card-text"><small class="text-muted">By {{post.user.user.username}} At {{post.time}}</small></p>
+
+   <pre style='white-space: pre-wrap;font-family:Helvetica, Arial, sans-serif;font-weight: 500; font-size: 16px;'>
+
+       <p class="mt-4 mb-4">{{post.summary}}</p>
+       <p class="mt-4 mb-4">{{post.content}}</p>
+    </pre>
+       {% if post.is_draft == 'true' %}
+    <p class="text-danger">This Post Is Marked As Draft Only You Can See This Post</p>
+    {% endif %}
+</div>
+{% endblock body %}

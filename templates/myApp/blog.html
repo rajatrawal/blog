@@ -1,0 +1,25 @@
+{% extends 'myApp/base.html' %}
+{% block body %}
+{% block css %}
+
+<style>
+    .img-thumbnail{
+        width:200px;
+    }
+</style>
+{% endblock css %}
+<div class="">
+    <h1 class="m-4 text-center">Your Profile</h1>
+    <img src="media/{{user.image}}" class="rounded mx-auto d-block img-thumbnail m-4" alt="...">
+    <ul>
+        <li><span class="fw-bold">Status : </span>{{user.type|title }} </li>
+        <li><span class="fw-bold">Name : </span>{{user.user.first_name }} {{user.user.last_name}}</li>
+        <li><span class="fw-bold">Username : </span>{{user.user.username }}</li>
+        <li><span class="fw-bold">E-mail : </span>{{user.user.email }} </li>
+        <li><span class="fw-bold">Address : </span>{{user.address }} </li>
+        <li><span class="fw-bold">City : </span>{{user.city }} </li>
+        <li><span class="fw-bold"> State: </span>{{user.state }} </li>
+        <li><span class="fw-bold"> Pincode: </span>{{user.pincode }} </li>
+    </ul>
+</div>
+{% endblock body %}

@@ -1,0 +1,30 @@
+{% extends 'myApp/base.html' %}
+
+{% load static %}\
+{% block body %}
+<form class="row g-3" action="{% url 'signin' %}" method="POST">{% csrf_token %}
+    <div class="col-12">
+        <label for="validationServer01" class="form-label">Username</label>
+        <input type="text" class="form-control " aria-describedby="validationServer01Feedback" id="validationServer01"
+          name='username' required>
+        <div id="validationServer01Feedback" class="invalid-feedback">
+          Please provide a valid username.
+        </div>
+    </div>
+    <div class="col-12">
+        <label for="validationServer02" class="form-label">Password</label>
+        <input type="password" class="form-control " name='password' aria-describedby="validationServer02Feedback" id="validationServer02"
+        name='username' required>
+        <div id="validationServer02Feedback" class="invalid-feedback">
+            Please provide a valid password.
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit" id="submitBtn">Signin</button>
+    </div>
+    <div ><button class="btn btn-link"><a href="{% url 'signup' %}"> Not Have  Accout Signup</a></button></div>
+</form>
+{% endblock body %}
+{% block script %}
+<script src="{% static 'myApp/script.js' %}"></script>
+{% endblock script %}
